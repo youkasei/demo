@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev --mode=development --host --port=2233",
+    "build": "npx prisma generate && nuxt build",
+    "dev": "nuxt dev --mode=development --host --port=2233 ",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@heroicons/vue": "^2.1.1",
     "@pinia/nuxt": "^0.5.1",
     "lru-cache": "^10.2.0",
     "pinia": "^2.1.7"

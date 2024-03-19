@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useMyStore } from "~/store/global";
 import type { Playlist, Track } from "~/type";
+definePageMeta({
+  keepalive: true,
+});
 
 const store = useMyStore();
 
@@ -8,14 +11,14 @@ const { id } = useRoute().params;
 
 const detailContainer = ref<HTMLElement | null>(null);
 const labelH = ref(36);
-const listH = ref(480);
+const listH = ref(380);
 onMounted(() => {
   if (detailContainer.value) {
     const { h: containerH } = useComputedStyle(detailContainer.value);
     const { h: headH } = useComputedStyle(
       detailContainer.value.firstChild?.firstChild as HTMLElement,
     );
-    listH.value = containerH - headH - labelH.value - 1;
+    listH.value = containerH - headH - labelH.value;
   }
 });
 
@@ -81,20 +84,20 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
         </div>
       </div>
       <div
-        class="flex w-full bg-slate-300 bg-opacity-40 px-16 text-gray-500"
+        class="grid w-full grid-cols-12 gap-2 bg-slate-300 bg-opacity-40 px-6 pr-4 text-gray-500"
         :style="{ height: `${labelH}px`, lineHeight: `${labelH}px` }"
       >
-        <div class="ml-2 w-96">歌曲标题</div>
-        <div class="w-64">歌曲时长</div>
-        <div class="w-80 indent-2">歌手</div>
-        <div class="w-80 indent-2">收录专辑</div>
+        <div class="col-span-3 pl-12">歌曲标题</div>
+        <div class="col-span-1">歌曲时长</div>
+        <div class="col-span-3">歌手</div>
+        <div class="col-span-3">收录专辑</div>
       </div>
       <div
-        class="overflow-y-auto px-6 py-8 pt-0 backdrop-opacity-90 duration-200"
+        class="overflow-y-auto px-6 py-8 pr-0 pt-0 backdrop-opacity-90 duration-75"
         :style="{ height: `${listH}px` }"
       >
         <div
-          class="flex bg-gradient-to-r from-slate-100 to-transparent py-2 text-sm even:from-transparent hover:from-white"
+          class="grid grid-cols-12 bg-gradient-to-r from-slate-100 to-transparent py-2 text-sm even:from-transparent hover:from-white"
           v-for="(item, index) in tracks"
           :data-id="item.id"
           :key="index"
@@ -105,11 +108,8 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
             }
           "
         >
-          <div class="block min-w-12 indent-2 text-gray-500">
-            {{ index + 1 }}
-          </div>
           <a
-            class="block w-96 overflow-hidden text-ellipsis text-nowrap"
+            class="col-span-3 flex overflow-hidden text-ellipsis text-nowrap"
             :class="{ 'text-red-500': item.id === store.currentId }"
             :title="
               item.name +
@@ -117,6 +117,7 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
               (item.alia && item.alia.length ? '-' + item.alia.join('、') : '')
             "
           >
+            <span class="block min-w-12 px-2"> {{ index + 1 }}</span>
             {{ item.name }}
             <span v-if="item.tns && item.tns.length" class="text-gray-500">
               - ( {{ item.tns.join("、") }} )
@@ -125,13 +126,13 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
               - ({{ item.alia.join("、") }})
             </span>
           </a>
-          <div class="w-64">
+          <div class="col-span-1">
             {{ $dayjs.duration(item.dt).format("mm:ss") }}
           </div>
-          <div class="w-80 overflow-hidden text-ellipsis text-nowrap pl-2">
+          <div class="col-span-3 overflow-hidden text-ellipsis text-nowrap">
             {{ item.ar.map((ar) => ar.name).join("/") }}
           </div>
-          <div class="w-80 overflow-hidden text-ellipsis text-nowrap pl-2">
+          <div class="col-span-3 overflow-hidden text-ellipsis text-nowrap">
             {{ item.al.name }}
           </div>
         </div>

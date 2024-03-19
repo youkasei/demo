@@ -7,6 +7,8 @@ import type {
   PlayListDetail,
   SongUrl,
   LyricRoot,
+  PlayListHot,
+  DjHot,
 } from "~/type";
 
 const options = {
@@ -54,9 +56,23 @@ export function getSongUrl(id: string | number): Promise<SongUrl> {
   });
 }
 
+export function getPlayListHot(): Promise<PlayListHot> {
+  return GET<PlayListHot>("/muc/playlist/hot");
+}
+
 export function getSongLyric(id: string | number): Promise<LyricRoot> {
   return GET<LyricRoot>("/muc/lyric", {
     id,
+  });
+}
+
+export function getDjHot(
+  offset: number = 0,
+  limit: number = 8,
+): Promise<DjHot> {
+  return GET<DjHot>("/muc/dj/hot", {
+    offset,
+    limit,
   });
 }
 

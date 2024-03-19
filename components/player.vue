@@ -58,7 +58,7 @@ async function timeupdate(audioEl?: HTMLAudioElement) {
   const target = Object.keys(timeLine.value).find((item, idx) => {
     return (
       parseFloat(item) >= audioEl.currentTime &&
-      parseFloat(item) - audioEl.currentTime < 0.5
+      parseFloat(item) - audioEl.currentTime <= 0.35
     );
   });
   if (target) {
@@ -71,7 +71,7 @@ async function timeupdate(audioEl?: HTMLAudioElement) {
 
 <template>
   <div
-    class="fixed bottom-0 left-0 h-16 w-full border-t bg-white px-48 py-2 shadow-2xl"
+    class="fixed bottom-0 left-0 h-[64px] w-full border-t bg-white px-48 py-2 shadow-2xl"
   >
     <audio
       ref="audio"
@@ -109,6 +109,10 @@ async function timeupdate(audioEl?: HTMLAudioElement) {
       </div>
       <img
         class="relative -top-1 ml-4 object-cover shadow-md"
+        :class="{
+          'opacity-0': !store.currentItem?.al.picUrl,
+          'opacity-100': store.currentItem?.al.picUrl,
+        }"
         width="65"
         height="65"
         :src="`${store.currentItem?.al.picUrl}?param=130y130`"

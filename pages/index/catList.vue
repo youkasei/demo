@@ -2,6 +2,10 @@
 import { useMyStore } from "~/store/global";
 import type { Playlist } from "~/type";
 
+definePageMeta({
+  keepalive: true,
+});
+
 const store = useMyStore();
 
 const catList = await getPlayListCatlist();
@@ -91,41 +95,10 @@ async function handleClick(e: Event) {
     </div>
   </div>
   <div
-    class="md:grid-cols- grid grid-cols-6 flex-wrap gap-x-8 gap-y-6 px-6 py-4 sm:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9"
+    class="ls:grid-cols-6 grid grid-cols-6 flex-wrap gap-x-8 gap-y-6 px-6 py-4 sm:grid-cols-4 lg:grid-cols-5"
     v-loading="loading"
   >
-    <div
-      v-for="(item, index) in playlists"
-      :key="item.id"
-      class="w-[140px] max-w-max cursor-pointer border bg-opacity-80 shadow"
-    >
-      <div class="relative bg-white bg-opacity-20 p-0.5 pb-0">
-        <img
-          class="w-full object-contain"
-          :src="item.coverImgUrl"
-          :alt="item.name"
-        />
-        <router-link
-          class="absolute inset-0"
-          :title="item.name"
-          :to="'/detail/playList-' + item.id"
-        ></router-link>
-      </div>
-      <div class="px-1 leading-4">
-        <a
-          :title="item.name"
-          class="block w-full overflow-hidden text-ellipsis text-nowrap text-sm text-gray-600"
-        >
-          {{ item.name }}
-        </a>
-        <div class="text-xs text-gray-400">
-          <span class="block"> Collected by: </span>
-          <span class="text-nowrap text-gray-500">{{
-            item.creator.nickname
-          }}</span>
-        </div>
-      </div>
-    </div>
+    <album v-for="(item, index) in playlists" :key="item.id" :item="item" />
   </div>
   <div class="relative flex w-full flex-col items-center py-10">
     <el-pagination
