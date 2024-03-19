@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DjHot, Playlist, Tag } from "~/type";
+import type { DjRadio, Playlist, Tag } from "~/type";
 definePageMeta({
   keepalive: true,
 });
@@ -39,7 +39,7 @@ watchEffect(() => {
 
 // 热门radio
 
-const hotradioList = ref<DjHot>();
+const hotradioList = ref<DjRadio[]>();
 
 async function getHotRadio() {
   const res = await getDjHot(0, 10);
