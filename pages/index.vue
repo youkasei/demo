@@ -7,7 +7,7 @@ console.log(route);
 </script>
 
 <template>
-  <div class="container flex min-h-screen min-w-full flex-col">
+  <div class="container flex min-h-screen w-screen flex-col">
     <div
       class="nav flex bg-gradient-to-r from-blue-500 to-blue-300 px-2 py-2 shadow-md"
     >
@@ -20,30 +20,33 @@ console.log(route);
       <search class="mx-auto"></search>
     </div>
     <div
-      class="content mx-auto grid w-full grid-cols-12 border-l border-r xl:max-w-5xl"
+      class="content mx-auto grid w-full grid-cols-12 sm:border-l sm:border-r md:w-full xl:max-w-7xl"
     >
       <ul
-        class="left col-span-2 border-r px-2 py-4 text-base font-semibold *:rounded-full *:py-2"
+        class="left col-span-2 hidden border-r px-2 py-4 text-base font-semibold *:rounded-full *:py-2 sm:block"
       >
         <li
-          class="px-4 hover:bg-sky-500 hover:text-white"
+          class="px-4 hover:bg-sky-100 hover:text-white"
           :class="{ 'bg-sky-400': activePath === '/mainpage' }"
         >
           <NuxtLink to="/mainpage" class="flex items-center"
-            ><HomeIcon class="mr-2" /> Home</NuxtLink
+            ><HomeIcon class="mr-2 h-6 w-6" /><span class="hidden xl:block"
+              >Home</span
+            ></NuxtLink
           >
         </li>
-        <li class="px-4 hover:bg-sky-500 hover:text-white">
+        <li class="px-4 hover:bg-sky-100 hover:text-white">
           <NuxtLink to="/catList" class="flex items-center">
-            <ListBulletIcon class="mr-2" /> CatList</NuxtLink
+            <ListBulletIcon class="mr-2 h-6 w-6" /> CatList</NuxtLink
           >
         </li>
       </ul>
-      <div class="right col-span-10">
+      <div class="mid col-span-12 sm:col-span-8">
         <KeepAlive>
           <NuxtPage />
         </KeepAlive>
       </div>
+      <div class="right sm: col-span-2 hidden border-l sm:block"></div>
     </div>
   </div>
   <player></player>

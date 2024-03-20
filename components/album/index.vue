@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="w-[140px] max-w-max cursor-pointer border bg-opacity-80 shadow duration-150 hover:scale-110 hover:ring-1"
+    class="w-28 max-w-max cursor-pointer border bg-opacity-80 shadow duration-150 hover:scale-110 hover:ring-1"
   >
     <div class="relative bg-white bg-opacity-20 p-0.5 pb-0">
       <img

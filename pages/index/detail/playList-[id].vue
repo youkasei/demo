@@ -87,8 +87,8 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
         class="grid w-full grid-cols-12 gap-2 bg-slate-300 bg-opacity-40 px-6 pr-4 text-gray-500"
         :style="{ height: `${labelH}px`, lineHeight: `${labelH}px` }"
       >
-        <div class="col-span-3 pl-12">歌曲标题</div>
-        <div class="col-span-1">歌曲时长</div>
+        <div class="col-span-4 pl-12">歌曲标题</div>
+        <div class="col-span-2">歌曲时长</div>
         <div class="col-span-3">歌手</div>
         <div class="col-span-3">收录专辑</div>
       </div>
@@ -109,7 +109,7 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
           "
         >
           <a
-            class="col-span-3 flex overflow-hidden text-ellipsis text-nowrap"
+            class="col-span-4 flex overflow-hidden text-ellipsis text-nowrap"
             :class="{ 'text-red-500': item.id === store.currentId }"
             :title="
               item.name +
@@ -126,7 +126,7 @@ const { name, creator, createTime, description, tags, tracks, coverImgUrl } =
               - ({{ item.alia.join("、") }})
             </span>
           </a>
-          <div class="col-span-1">
+          <div class="col-span-2">
             {{ $dayjs.duration(item.dt).format("mm:ss") }}
           </div>
           <div class="col-span-3 overflow-hidden text-ellipsis text-nowrap">

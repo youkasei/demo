@@ -51,36 +51,29 @@ getHotRadio();
 
 <template>
   <div
-    class="relative w-full px-16 pb-2 pt-8 shadow duration-200"
+    class="relative w-full shadow duration-200 sm:px-16 sm:pb-2 sm:pt-8"
     :style="{ backgroundImage: `url(${banners[bannerIndex].imageUrl})` }"
   >
     <div class="absolute inset-0 z-0 h-full w-full backdrop-blur-2xl"></div>
     <el-carousel
-      :interval="2000"
+      :interval="2500"
       motion-blur
       loop
       @change="handleChange"
-      height="200px"
       indicator-position="none"
-      style="width: 540px"
+      class="w-full"
     >
-      <el-carousel-item
-        v-for="item in banners"
-        :key="item.imageUrl"
-        class="bg-contain bg-no-repeat"
-        :style="{
-          backgroundImage: `url(${item.imageUrl})`,
-          width: '540px',
-          height: '200px',
-        }"
-      >
+      <el-carousel-item v-for="item in banners" :key="item.imageUrl">
+        <img
+          class="block h-[200px] w-full object-contain"
+          :src="item.imageUrl"
+          alt=""
+        />
       </el-carousel-item>
     </el-carousel>
   </div>
   <recommand title="歌单推荐" :list="list" v-model:active="recommandActive">
-    <div
-      class="mx-auto grid w-full grid-cols-8 space-y-2 sm:grid-cols-4 lg:grid-cols-5"
-    >
+    <div class="mx-auto grid w-full grid-cols-3 space-y-2 sm:grid-cols-5">
       <album
         v-for="(item, index) in recommandListData"
         :key="index"
@@ -90,7 +83,9 @@ getHotRadio();
   </recommand>
 
   <recommand title="热门电台">
-    <div class="grid grid-cols-12 space-x-2 sm:grid-cols-4 lg:grid-cols-5">
+    <div
+      class="grid grid-cols-3 space-x-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-12"
+    >
       <div
         v-for="(item, index) in hotradioList"
         :key="index"
@@ -113,6 +108,9 @@ getHotRadio();
 </template>
 
 <style>
-.te {
+.el-carousel {
+  &__container {
+    height: 200px;
+  }
 }
 </style>

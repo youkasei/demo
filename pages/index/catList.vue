@@ -61,7 +61,7 @@ async function handleClick(e: Event) {
 
 <template>
   <div
-    class="flex flex-col border-b p-4 pt-4 text-sm text-gray-500 shadow shadow-blue-200"
+    class="flex flex-col border-b p-4 pt-4 text-sm text-gray-500"
     @click="handleClick"
   >
     <div
