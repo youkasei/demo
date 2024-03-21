@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     themes: ["dark"],
   },
   dayjs: {
-    plugins: ["Duration"],
+    plugins: ["duration"],
   },
   routeRules: {
     "/api/**": {
