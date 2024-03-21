@@ -36,7 +36,9 @@ export const useMyStore = defineStore({
       const res = await getSongUrl(id);
       this.currentId = id;
       this.url = "";
-      this.url = res.data[0].url;
+      this.url =
+        res.data[0].url ||
+        `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
       if (this.currentItem) {
         document.title = `${this.currentItem.name} (${this.currentItem.alia?.join("/")}) - ${this.currentItem.ar.map((item) => item.name).join("/")}`;
       } else {
