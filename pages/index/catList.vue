@@ -25,7 +25,7 @@ const tree = Object.values(catList.categories).reduce(
 const keyWords = ref<string | null>(store.cat || catList.all.name);
 
 const offset = ref<number>(store.pageIndex || 1);
-const limit = ref<number>(45);
+const limit = ref<number>(15);
 const total = ref<number>(0);
 const loading = ref<boolean>(false);
 
@@ -95,12 +95,12 @@ async function handleClick(e: Event) {
     </div>
   </div>
   <div
-    class="ls:grid-cols-6 grid grid-cols-6 flex-wrap gap-x-8 gap-y-6 px-6 py-4 sm:grid-cols-4 lg:grid-cols-5"
+    class="ls:grid-cols-6 grid grid-cols-3 flex-wrap justify-items-center gap-x-2 gap-y-6 px-6 py-4 lg:grid-cols-5"
     v-loading="loading"
   >
     <album v-for="(item, index) in playlists" :key="item.id" :item="item" />
   </div>
-  <div class="relative flex w-full flex-col items-center py-10">
+  <div class="relative mb-20 flex w-full flex-col items-center pt-2">
     <el-pagination
       background
       layout="prev, pager, next"

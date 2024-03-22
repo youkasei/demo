@@ -71,7 +71,7 @@ async function timeupdate(audioEl?: HTMLAudioElement) {
 
 <template>
   <div
-    class="fixed bottom-0 left-0 h-[64px] w-full border-t bg-white px-48 py-2 shadow-2xl"
+    class="fixed bottom-0 left-0 h-[64px] w-full border-t bg-white px-2 py-2 shadow-2xl"
   >
     <audio
       ref="audio"
@@ -82,43 +82,29 @@ async function timeupdate(audioEl?: HTMLAudioElement) {
       @play="play(audio)"
       @timeupdate="timeupdate(audio)"
     ></audio>
-    <div class="control relative flex h-full items-center">
-      <div class="flex h-[42px] select-none items-center *:cursor-pointer">
+    <div class="control relative flex h-full max-w-max items-center sm:mx-auto">
+      <div
+        class="*:w-18 flex h-[42px] select-none items-center *:h-8 *:cursor-pointer"
+      >
+        <img src="/img/上一曲.png" alt="prev" @click="store.playPrev" />
         <img
-          src="/img/上一曲.png"
-          width="36"
-          height="36"
-          alt="prev"
-          @click="store.playPrev"
-        />
-        <img
-          class="mx-2"
+          class="xl:mx-2"
           :src="playing ? '/img/播放中.png' : '/img/暂停.png'"
-          width="36"
-          height="36"
           alt="play"
           @click="() => (playing ? audio?.pause() : audio?.play())"
         />
-        <img
-          src="/img/下一曲.png"
-          width="36"
-          height="36"
-          alt="next"
-          @click="store.playNext"
-        />
+        <img src="/img/下一曲.png" alt="next" @click="store.playNext" />
       </div>
       <img
-        class="relative -top-1 ml-4 object-cover shadow-md"
+        class="relative -top-1 ml-2 h-12 w-12 object-cover shadow-md sm:ml-4"
         :class="{
           'opacity-0': !store.currentItem?.al.picUrl,
           'opacity-100': store.currentItem?.al.picUrl,
         }"
-        width="65"
-        height="65"
         :src="`${store.currentItem?.al.picUrl}?param=130y130`"
         alt="album"
       />
-      <div class="ml-6 mr-24 w-96">
+      <div class="ml-2 mr-20 w-24 sm:mr-24 xl:w-96">
         <a
           class="name mb-1 block w-full overflow-hidden text-ellipsis text-nowrap px-2 text-sm leading-4 text-gray-500"
           :title="`${store?.currentItem?.name}${store?.currentItem?.ar.map((item) => item.name).join('/')}`"
@@ -150,15 +136,15 @@ async function timeupdate(audioEl?: HTMLAudioElement) {
             >
           </span>
         </div>
-        <div class="mt-1 px-2 text-xs leading-4">
+        <div
+          class="mt-1 w-full overflow-hidden text-ellipsis text-nowrap px-2 text-xs leading-4"
+        >
           {{ currentLyric || "..." }}
         </div>
       </div>
       <img
-        class="block cursor-pointer object-contain"
+        class="ml-2 block h-8 w-8 cursor-pointer object-contain"
         src="/img/播放列表.png"
-        width="36"
-        height="36"
         alt="list"
         @click="() => (openList = !openList)"
       />

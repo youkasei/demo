@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="w-28 max-w-max cursor-pointer border bg-opacity-80 shadow duration-150 hover:scale-110 hover:ring-1"
+    class="w-full max-w-max cursor-pointer border bg-opacity-80 shadow duration-200 hover:scale-105 hover:ring-1"
   >
     <div class="relative bg-white bg-opacity-20 p-0.5 pb-0">
       <img
@@ -33,9 +33,10 @@ const props = defineProps({
       </a>
       <div class="text-xs text-gray-400">
         <span class="block"> Collected by: </span>
-        <span class="text-nowrap text-gray-500">{{
-          item.creator.nickname
-        }}</span>
+        <span
+          class="block overflow-hidden text-ellipsis text-nowrap text-gray-500"
+          >{{ item.creator.nickname }}</span
+        >
       </div>
     </div>
   </div>
